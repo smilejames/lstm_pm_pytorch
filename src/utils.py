@@ -2,6 +2,7 @@ import json
 import numpy as np
 import os
 import scipy.misc
+from imageio import imsave
 
 
 def loss_history_init(temporal=5):
@@ -34,12 +35,12 @@ def save_loss(predict_heatmaps, label_map, epoch, step, criterion, train, tempor
     if train is True:
         if not os.path.exists(save_dir + 'loss_epoch' + str(epoch)):
             os.mkdir(save_dir + 'loss_epoch' + str(epoch))
-        json.dump(loss_save, open(save_dir + 'loss_epoch' + str(epoch) + '/s' + str(step).zfill(4) + '.json', 'wb'))
+        json.dump(loss_save, open(save_dir + 'loss_epoch' + str(epoch) + '/s' + str(step).zfill(4) + '.json', 'w'))
 
     else:
         if not os.path.exists(save_dir + 'loss_test/'):
             os.mkdir(save_dir + 'loss_test/')
-        json.dump(loss_save, open(save_dir + 'loss_test/' + str(step).zfill(4) + '.json', 'wb'))
+        json.dump(loss_save, open(save_dir + 'loss_test/' + str(step).zfill(4) + '.json', 'w'))
 
     return total_loss
 
@@ -75,12 +76,12 @@ def save_images(label_map, predict_heatmaps, step, epoch, imgs, train, pck=1, te
         if train is True:
             if not os.path.exists(save_dir + 'epoch'+str(epoch)):
                 os.mkdir(save_dir + 'epoch'+str(epoch))
-            scipy.misc.imsave(save_dir + 'epoch'+str(epoch) + '/s'+str(step) + '_b' + str(b) + '_' + seq + img + '.jpg', output)
+            imsave(save_dir + 'epoch'+str(epoch) + '/s'+str(step) + '_b' + str(b) + '_' + seq + img + '.jpg', output)
         else:
 
             if not os.path.exists(save_dir + 'test'):
                 os.mkdir(save_dir + 'test')
-            scipy.misc.imsave(save_dir + 'test' + '/s' + str(step) + '_b' + str(b) + '_'
+            imsave(save_dir + 'test' + '/s' + str(step) + '_b' + str(b) + '_'
                               + seq + img + '_' + str(round(pck, 4)) + '.jpg', output)
 
 
@@ -185,12 +186,12 @@ def Tests_save_label_imgs(label_map, predict_heatmaps, step, imgs, temporal=13, 
         # calculate average PCK
         # print pck_dict
         avg_pck = sum(pck_dict.values()) / float(pck_dict.__len__())
-        print 'step ...%d ... PCK %f  ....' % (step, avg_pck)
+        print('step ...%d ... PCK %f  ....' % (step, avg_pck))
 
         # ****************** save image ******************
         if not os.path.exists(save_dir + 'test'):
             os.mkdir(save_dir + 'test')
-        scipy.misc.imsave(save_dir + 'test' + '/s' + str(step) + '_'
+        imsave(save_dir + 'test' + '/s' + str(step) + '_'
                           + seq + img + '_' + str(round(avg_pck, 4)) + '.jpg', output)
 
         # ****************** save label ******************

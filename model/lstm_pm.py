@@ -211,5 +211,5 @@ if __name__ == '__main__':
     c = torch.randn(2, 1, 368, 368)
     maps = net(a, c)
     for m in maps:
-       print m.shape
+       print(m.shape)
 

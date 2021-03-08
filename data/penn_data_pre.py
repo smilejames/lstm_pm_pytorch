@@ -16,7 +16,7 @@ test_dir = 'Penn_Action/test'
 nums = os.listdir(label_dir)
 
 for idx, num in enumerate(nums, 1):
-    print idx
+    print(idx)
     data = scipy.io.loadmat(os.path.join(label_dir, num))
     num = num.split('.')[0]
     

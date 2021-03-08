@@ -142,7 +142,7 @@ class Penn_Data(Dataset):
         seqtrain * (parts_num + 1 ) * label_size * label_size
         5 * 14 * 46 * 46
         '''
-        label_size = boxsize / stride               # 368 / 8 = 46
+        label_size = boxsize // stride               # 368 / 8 = 46
         label_map = torch.zeros(self.seqTrain, self.parts_num + 1, label_size, label_size)
 
         #

@@ -57,11 +57,11 @@ class UCIHandPoseDataset(Dataset):
                 self.temporal_dir.append(tmp)  #
 
         self.temporal_dir.sort()
-        print 'total numbers of image sequence is ' + str(len(self.temporal_dir))
+        print('total numbers of image sequence is ' + str(len(self.temporal_dir)))
 
     def __len__(self):
         if self.train is True:
-            length = len(self.temporal_dir)/self.temporal
+            length = len(self.temporal_dir) // self.temporal
         else:
             length = len(self.temporal_dir)
         return length
@@ -75,7 +75,7 @@ class UCIHandPoseDataset(Dataset):
         center_map      3D Tensor      1                *   height(368)   *   weight(368)
         imgs            list of image directory
         """
-        label_size = self.width / 8 - 1         # 45
+        label_size = self.width // 8 - 1         # 45
 
         imgs = self.temporal_dir[idx]           # ['.../001L0/L0005.jpg', '.../001L0/L0011.jpg', ... ]
         imgs.sort()
@@ -167,6 +167,6 @@ if __name__ == '__main__':
 
     a = dataset.temporal_dir
     images, label_maps,center_map =  dataset[2]
-    print images.shape  # (5*3) * 368 * 368
-    print label_maps.shape  # 5 21 45 45
+    print(images.shape)  # (5*3) * 368 * 368
+    print(label_maps.shape)  # 5 21 45 45
 
